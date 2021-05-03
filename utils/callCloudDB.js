@@ -11,6 +11,7 @@ const callCloudDB = async (ctx, fnName, query = {}) => {
 		})
 		.then((res) => {
 			// console.log(JSON.parse(res.data.data))
+			// console.log(res.data)
 			//?数据类型
 			return res.data
 		})

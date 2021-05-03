@@ -2,7 +2,7 @@ const Koa = require('koa')
 const app = new Koa()
 const Router = require('koa-router')
 const cors = require('koa2-cors')
-const koaBody=require('koa-body')
+const koaBody = require('koa-body')
 const router = new Router()
 //小程序环境id
 const Env = 'cloud1-8g4btmo4df7e108b'
@@ -13,9 +13,11 @@ app.use(
 	})
 )
 //接收post参数的解析
-app.use(koaBody({
-  multipart:true
-}))
+app.use(
+	koaBody({
+		multipart: true,
+	})
+)
 
 //全局中间件
 app.use(async (ctx, next) => {
@@ -24,8 +26,10 @@ app.use(async (ctx, next) => {
 	await next()
 })
 const playlist = require('./controller/playlist')
+const swiper = require('./controller/swiper')
 //通过方法导入路由
 router.use('/playlist', playlist.routes())
+router.use('/swiper', swiper.routes())
 
 app.use(router.routes())
 app.use(router.allowedMethods())
