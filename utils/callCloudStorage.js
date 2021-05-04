@@ -4,6 +4,7 @@ const fs = require('fs')
 const rp = require('request-promise')
 const FormData = require('form-data')
 const qs = require('qs')
+
 const cloudStorage = {
 	async download(ctx, fileList) {
 		const access_token = await getAccessToken()
@@ -92,6 +93,21 @@ const cloudStorage = {
 		}
 		await rp(params)
 		return info.file_id
+	},
+	async delete(ctx, fileid_list) {
+		const access_token = await getAccessToken()
+		const url = `https://api.weixin.qq.com/tcb/batchdeletefile?access_token=${access_token}`
+		return await axios
+			.post(url, {
+        env: ctx.state.env,
+        fileid_list: fileid_list,
+			})
+			.then((res) => {
+				// console.log(JSON.parse(res.data.data))
+				// console.log(res.data)
+				//?数据类型
+				return res.data
+			})
 	},
 }
 module.exports = cloudStorage
