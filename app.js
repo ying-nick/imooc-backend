@@ -27,9 +27,11 @@ app.use(async (ctx, next) => {
 })
 const playlist = require('./controller/playlist')
 const swiper = require('./controller/swiper')
+const blog = require('./controller/blog')
 //通过方法导入路由
 router.use('/playlist', playlist.routes())
 router.use('/swiper', swiper.routes())
+router.use('/blog', blog.routes())
 
 app.use(router.routes())
 app.use(router.allowedMethods())
